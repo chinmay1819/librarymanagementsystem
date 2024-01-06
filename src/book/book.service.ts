@@ -1,6 +1,6 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Book } from './book.enity';
+import { Book } from './book.entity';
 import { Repository } from 'typeorm';
 import { CreateBookDto } from './dtos/create-book.dto';
 
@@ -13,7 +13,7 @@ export class BookService {
   ) {}
 
   async createBook(createBookDto: CreateBookDto): Promise<Book> {
-    const { bookName, author, ISBN, publicationYear, genre } = createBookDto;
+    const { bookName, author, ISBN, publicationYear, genre,quantityAvailable } = createBookDto;
 
     const newBook = this.bookRepository.create({
       bookName,
@@ -21,6 +21,7 @@ export class BookService {
       ISBN,
       publicationYear,
       genre,
+      quantityAvailable
     });
 
     return await this.bookRepository.save(newBook);

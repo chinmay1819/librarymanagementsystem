@@ -1,8 +1,8 @@
 import { Controller,Get,Post,Body, HttpStatus } from '@nestjs/common';
-import { Book } from './book.enity';
-import { BookService } from './book.service';
+import { Book } from './book.entity';
 import { CreateBookDto } from './dtos/create-book.dto';
 import { CustomResponse } from 'src/shared/custom-response';
+import { BookService } from './book.service';
 
 @Controller('book')
 export class BookController {

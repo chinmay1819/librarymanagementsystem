@@ -4,4 +4,5 @@ export class CreateBookDto {
     readonly ISBN: string;
     readonly publicationYear: number;
     readonly genre: string;
+    readonly quantityAvailable:number
 }

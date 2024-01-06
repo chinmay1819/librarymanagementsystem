@@ -5,7 +5,7 @@ import { MembersModule } from './members/members.module';
 import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { BookModule } from './book/book.module';
-import { TransactionsModule } from './transactions/transactions.module';
+// import { TransactionsModule } from './transactions/transactions.module';
 
 @Module({
   imports: [
@@ -22,7 +22,7 @@ import { TransactionsModule } from './transactions/transactions.module';
       synchronize: true,
     }),
     BookModule,
-    TransactionsModule
+    // TransactionsModule
   ],
   controllers: [AppController],
   providers: [AppService],
