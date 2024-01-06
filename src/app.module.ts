@@ -1,0 +1,30 @@
+import { Module } from '@nestjs/common';
+import { AppController } from './app.controller';
+import { AppService } from './app.service';
+import { MembersModule } from './members/members.module';
+import { ConfigModule } from '@nestjs/config';
+import { TypeOrmModule } from '@nestjs/typeorm';
+import { BookModule } from './book/book.module';
+import { TransactionsModule } from './transactions/transactions.module';
+
+@Module({
+  imports: [
+    MembersModule,
+    ConfigModule.forRoot(),
+    TypeOrmModule.forRoot({
+      type: 'postgres',
+      host: process.env.PG_HOST,
+      port: parseInt(process.env.PG_PORT, 10),
+      username: process.env.PG_USER,
+      password: process.env.PG_PASSWORD,
+      database: process.env.PG_DB,
+      entities: [__dirname + '/**/*.entity{.ts,.js}'],
+      synchronize: true,
+    }),
+    BookModule,
+    TransactionsModule
+  ],
+  controllers: [AppController],
+  providers: [AppService],
+})
+export class AppModule {}
