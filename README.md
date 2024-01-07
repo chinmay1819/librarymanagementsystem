@@ -75,6 +75,8 @@ Nest is [MIT licensed](LICENSE).
 
 ```
 Kindly create the database before running the application 
+
+CREATE DATABASE LIBRARY;
 ```
 
 
