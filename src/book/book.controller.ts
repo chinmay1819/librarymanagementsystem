@@ -58,4 +58,32 @@ export class BookController {
   }
 
   
+  // return a book
+  @Post('/return/:borrowingId')
+  async returnBook(@Param('borrowingId') borrowingId: string) {
+    try {
+      const result = await this.booksService.returnBook(borrowingId);
+
+      if (result.message === 'Book returned successfully') {
+        const response = new CustomResponse('Book returned successfully', HttpStatus.OK, result);
+        return response;
+      } else if (result.message === 'Transaction not found') {
+        const response = new CustomResponse('Transaction not found', HttpStatus.NOT_FOUND);
+        return response;
+      } else {
+        const response = new CustomResponse('Error returning book', HttpStatus.INTERNAL_SERVER_ERROR);
+        return response;
+      }
+    } catch (error) {
+      console.error(error);
+      const response = new CustomResponse('Error returning book', HttpStatus.INTERNAL_SERVER_ERROR);
+      return response;
+    }
+  }
+
+  
+
+
+
+
 } 

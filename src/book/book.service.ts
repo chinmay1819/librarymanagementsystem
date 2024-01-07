@@ -46,7 +46,10 @@ export class BookService {
     return await this.bookRepository.find();
   }
 
-  async borrowBook(bookId: string, memberId: string):Promise<{ message: string; transactionId?: string }> {
+  async borrowBook(
+    bookId: string,
+    memberId: string,
+  ): Promise<{ message: string; transactionId?: string }> {
     try {
       // Calculate the expectedReturnDate (15 days from the current date)
       const currentDate = new Date();
@@ -69,7 +72,6 @@ export class BookService {
         return { message: 'No available copies of the book' };
       }
 
-      
       // Create a new transaction record
 
       const newTransaction = this.transactionRepository.create({
@@ -80,14 +82,18 @@ export class BookService {
         expectedReturnDate,
       });
 
-      
-      const savedTransaction=await this.transactionRepository.save(newTransaction);
+      const savedTransaction = await this.transactionRepository.save(
+        newTransaction,
+      );
       book.quantityAvailable -= 1;
       await this.bookRepository.save(book);
-      
+
       // Additional logic or return value based on the result...
 
-      return { message: 'Book borrowed successfully', transactionId: savedTransaction.id };
+      return {
+        message: 'Book borrowed successfully',
+        transactionId: savedTransaction.id,
+      };
     } catch (error) {
       // Handle errors...
       console.error(error);
@@ -95,5 +101,54 @@ export class BookService {
     }
   }
 
+  // return a book
 
+  async returnBook(
+    borrowingId: string,
+  ): Promise<{ message: string; transactionId?: string }> {
+    try {
+      // Retrieve the transaction record from the database
+      const transaction = await this.transactionRepository.findOne({
+        where: { id: borrowingId },
+      });
+
+      if (!transaction) {
+        return { message: 'Transaction not found' };
+      }
+
+      // Update the transaction status to 'returned'
+      transaction.status = TransactionStatus.RETURNED;
+      transaction.returnedDate = new Date();
+
+      // Save the updated transaction record to the database
+      await this.transactionRepository.save(transaction);
+
+      // Retrieve the associated book using transaction's book ID
+      const book = await this.bookRepository.findOne({
+        where: { bookId: transaction.book.bookId },
+      });
+
+      if (!book) {
+        return { message: 'Book not found' };
+      }
+
+      // Increase the quantityAvailable field in the book repository by 1
+      book.quantityAvailable += 1;
+
+      // Save the updated book record to the database
+      await this.bookRepository.save(book);
+
+      // Additional logic or return value based on the result...
+      return {
+        message: 'Book returned successfully',
+        transactionId: transaction.id,
+      };
+    } catch (error) {
+      // Handle errors...
+      console.error(error);
+      return { message: 'Error returning book' };
+    }
+  }
+
+  
 }
