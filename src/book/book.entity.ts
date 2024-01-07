@@ -1,4 +1,5 @@
-import { Entity, Column, PrimaryGeneratedColumn, Unique } from 'typeorm';
+import { Transaction } from 'src/transactions/transactions.entity';
+import { Entity, Column, PrimaryGeneratedColumn, Unique, OneToMany } from 'typeorm';
 
 @Entity()
 @Unique(['bookId', 'ISBN'])
@@ -16,6 +17,9 @@ export class Book {
   @Column({ unique: true })
   @Unique(['ISBN'])
   ISBN: string;
+
+  @OneToMany(() => Transaction, (transaction) => transaction.book)
+  transactions: Transaction[];
 
   @Column()
   publicationYear: number;

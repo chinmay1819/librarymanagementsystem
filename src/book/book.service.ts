@@ -155,5 +155,22 @@ export class BookService {
     }
   }
 
+  async getBooksMultipleBorrowers(): Promise<{ bookName: string; borrowerCount: number }[]> {
+    const queryResult = await this.bookRepository
+      .createQueryBuilder('book')
+      .leftJoin('book.transactions', 'transaction')
+      .select('book.bookName', 'bookName')
+      .addSelect('COUNT(DISTINCT transaction.memberId)', 'borrowerCount')
+      .groupBy('book.bookName')
+      .having('COUNT(DISTINCT transaction.memberId) > 1')
+      .getRawMany();
+  
+    return queryResult.map((result) => ({
+      bookName: result.bookName,
+      borrowerCount: parseInt(result.borrowerCount, 10),
+    }));
+  }
+  
+  
   
 }

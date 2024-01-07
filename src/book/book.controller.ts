@@ -86,7 +86,29 @@ export class BookController {
   }
 
 
+  //books which are borrowed by more than 1 member
+  @Get('/multiple-borrowers')
+  async booksWithMultipleBorrowers(): Promise<CustomResponse<{ bookName: string; borrowerCount: number }[]>> {
+    try {
+      const result = await this.booksService.getBooksMultipleBorrowers();
 
+      const response = new CustomResponse(
+        'Books with multiple borrowers fetched successfully',
+        HttpStatus.OK,
+        result,
+      );
+
+      return response;
+    } catch (error) {
+      console.error(error);
+      const response = new CustomResponse(
+        'Error fetching books with multiple borrowers',
+        HttpStatus.INTERNAL_SERVER_ERROR,
+        null, // You can customize the payload based on your needs
+      );
+      return response;
+    }
+  }
 
 
 
