@@ -88,7 +88,7 @@ Request url :
 
 http://localhost:3000/
 
-Response : 
+Response body: 
 
 ```
 Hello World!
@@ -101,7 +101,7 @@ Hello World!
 GET /members/getall
 ```
 
-Request Url : 
+Request url : 
 
 http://localhost:3000/members/getall
 
@@ -172,7 +172,7 @@ Request payload :
   "address": "Pune"
 }
 ```
-Response :
+Response body :
 
 ```
 {
@@ -193,7 +193,7 @@ Request url:
 
 http://localhost:3000/members/history/028861cf-bc78-4758-96f2-4c7209687ee8
 
-Response :
+Response body:
 ```
 {
   "message": "Borrowing history fetched successfully",
@@ -253,12 +253,12 @@ Response :
 ```
 GET /book/allbooks
 ```
-Request Url:
+Request url:
 
 http://localhost:3000/book/allbooks
 
 
-Response :
+Response body:
 ```
 {
   "message": "Books fetched successfully",
@@ -335,7 +335,7 @@ Request Payload :
 }
 ```
 
-Response :
+Response body:
 
 ```
 {
@@ -361,7 +361,7 @@ Request url :
 
 http://localhost:3000/book/borrow/cb9759e4-41ba-4958-a297-7a82a247f81c/028861cf-bc78-4758-96f2-4c7209687ee8
 
-Response :
+Response body:
 
 ```
 {
@@ -380,7 +380,7 @@ Response :
 POST /book/return/{borrowingId}
 ```
 
-Request Url:
+Request url:
 
 http://localhost:3000/book/return/3a5005c9-3a3f-4156-b738-c6b8b637b4d8
 
@@ -408,7 +408,7 @@ Request url:
 
 http://localhost:3000/book/multiple-borrowers
 
-Response :
+Response body:
 
 ```
 {
