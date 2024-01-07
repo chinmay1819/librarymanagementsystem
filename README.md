@@ -71,3 +71,55 @@ Nest is an MIT-licensed open source project. It can grow thanks to the sponsors 
 ## License
 
 Nest is [MIT licensed](LICENSE).
+
+
+Request Url : 
+
+http://localhost:3000/members/getall
+
+Response body :
+[
+  {
+    "id": "2a6de641-501e-4aa6-8219-ba7297bcbe78",
+    "memberId": "38f9d4f9-7e13-427a-9480-4a549237da0b",
+    "email": "rohit@gmail.com",
+    "phone": "9834332678",
+    "address": "Pune"
+  },
+  {
+    "id": "5e26ed38-92d1-4d63-9956-a87b3e140156",
+    "memberId": "99fce759-d145-4b71-8fed-b58791f2214a",
+    "email": "chinmay@gmail.com",
+    "phone": "9834332655",
+    "address": "Pune"
+  },
+  {
+    "id": "d8ccfe43-a2da-412a-b213-cb598a93ca2c",
+    "memberId": "adb3ae8b-68a0-428f-a8e9-ff88a24fba05",
+    "email": "vishalv@gmail.com",
+    "phone": "98343326585",
+    "address": "Pune"
+  },
+  {
+    "id": "9888a44d-4555-4be4-af2c-726a641187b6",
+    "memberId": "7ff1cc79-623e-42f8-ace9-ba45e3a5ef02",
+    "email": "chinmaydeshpande34@gmail.com",
+    "phone": "124567832",
+    "address": "Nanded"
+  },
+  {
+    "id": "d133f361-da95-4b7f-8837-6a9df9c44455",
+    "memberId": "f5797340-df4e-4a1c-af0a-fdd45cb9c8d1",
+    "email": "hrishi@gmail.com",
+    "phone": "9876543210",
+    "address": "nanded"
+  },
+  {
+    "id": "d7337133-ea8e-464f-a5d2-479832d2e738",
+    "memberId": "028861cf-bc78-4758-96f2-4c7209687ee8",
+    "email": "abc@gmail.com",
+    "phone": "1234567090",
+    "address": "Pune"
+  }
+]
+

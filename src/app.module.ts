@@ -20,12 +20,13 @@ import { TransactionsModule } from './transactions/transactions.module';
       database: process.env.PG_DB,
       entities: [__dirname + '/**/*.entity{.ts,.js}'],
       synchronize: true,
-      logging:false
+      logging: false
     }),
     BookModule,
-    TransactionsModule
+    TransactionsModule,
   ],
   controllers: [AppController],
   providers: [AppService],
 })
 export class AppModule {}
+
