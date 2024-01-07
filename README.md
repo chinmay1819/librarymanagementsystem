@@ -53,6 +53,12 @@ $ npm run start:dev
 $ npm run start:prod
 ```
 
+## Swagger Documentation
+Access the swagger for the application on below url
+```
+http://localhost:3000/api/
+```
+
 ## Support
 
 Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
