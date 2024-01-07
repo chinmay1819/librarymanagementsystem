@@ -30,15 +30,6 @@ export class MembersService {
     return await this.memberRepository.save(newMember);
   }
 
-  async updateMember(id: number, member: Member): Promise<Member> {
-    await this.memberRepository.update(id, member);
-    return await this.memberRepository.findOne({ where: { id } });
-  }
-
-  async deleteMember(id: number): Promise<void> {
-    await this.memberRepository.delete(id);
-  }
-
   async getBorrowingHistory(memberId: string): Promise<Transaction[]> {
     // Fetch the member by memberId
     const member = await this.memberRepository.findOne({ where: { memberId } });

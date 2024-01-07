@@ -17,34 +17,12 @@ export class MembersController {
         return this.membersService.findAll()
     }
     
-    @Get("/getbyid/:id")
-    async findOne(@Param('id') id:number):Promise<Member>{
-        const member = this.membersService.findOne(id);
-        if(!member){
-            throw new Error('User not found')
-        }
-        return member
-    }
-
     @Post('/create')
     async create(@Body() member:CreateMemberDto):Promise<Member>{
         return await this.membersService.createMember(member);
     }
 
-    @Put('/update/:id')
-    async update(@Param('id') id:number,@Body() member:Member):Promise<Member>{
-        return await this.membersService.updateMember(id,member);
-    }
-
-    @Delete('/delete/:id')
-    async deleteMember(@Param('id')id:number){
-        const member = await this.membersService.findOne(id);
-        if(!member){
-            throw new Error('Member not found')
-        }
-        return this.membersService.deleteMember(id);
-    }
-
+    
     @Get('/history/:memberId')
     async history(@Param('memberId')memberId:string){
         try{
