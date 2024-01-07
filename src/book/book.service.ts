@@ -46,7 +46,7 @@ export class BookService {
     return await this.bookRepository.find();
   }
 
-  async borrowBook(bookId: string, memberId: string): Promise<string> {
+  async borrowBook(bookId: string, memberId: string):Promise<{ message: string; transactionId?: string }> {
     try {
       // Calculate the expectedReturnDate (15 days from the current date)
       const currentDate = new Date();
@@ -61,16 +61,15 @@ export class BookService {
       });
 
       if (!book || !member) {
-        return 'Book or member not found';
+        return { message: 'Book or member not found' };
       }
 
       // Check if there are available copies of the book
       if (book.quantityAvailable <= 0) {
-        return 'No available copies of the book';
+        return { message: 'No available copies of the book' };
       }
 
-      console.log(book);
-      console.log(member);
+      
       // Create a new transaction record
 
       const newTransaction = this.transactionRepository.create({
@@ -81,21 +80,20 @@ export class BookService {
         expectedReturnDate,
       });
 
-      console.log('newTransaction', newTransaction);
-      //   // Save the new transaction record to the database
-      await this.transactionRepository.save(newTransaction);
+      
+      const savedTransaction=await this.transactionRepository.save(newTransaction);
       book.quantityAvailable -= 1;
       await this.bookRepository.save(book);
-
+      
       // Additional logic or return value based on the result...
 
-      return 'Book borrowed successfully';
+      return { message: 'Book borrowed successfully', transactionId: savedTransaction.id };
     } catch (error) {
       // Handle errors...
       console.error(error);
-      return 'Error borrowing book';
+      return { message: 'Error borrowing book' };
     }
   }
 
-  
+
 }

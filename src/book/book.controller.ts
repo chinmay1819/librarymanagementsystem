@@ -36,8 +36,20 @@ export class BookController {
   async borrowBook(@Param('bookId')bookId:string , @Param('memberId')memberId:string){
     try {
       const result = await this.booksService.borrowBook(bookId, memberId);
-      const response = new CustomResponse('Book borrowed successfully', HttpStatus.OK, result);
-      return response;
+
+      if (result.message === 'Book borrowed successfully') {
+        const response = new CustomResponse('Book borrowed successfully', HttpStatus.OK, result);
+        return response;
+      } else if (result.message === 'Book or member not found') {
+        const response = new CustomResponse('Book or member not found', HttpStatus.NOT_FOUND);
+        return response;
+      } else if (result.message === 'No available copies of the book') {
+        const response = new CustomResponse('No available copies of the book', HttpStatus.BAD_REQUEST);
+        return response;
+      } else {
+        const response = new CustomResponse('Error borrowing book', HttpStatus.INTERNAL_SERVER_ERROR);
+        return response;
+      }
     } catch (error) {
       console.error(error);
       const response = new CustomResponse('Error borrowing book', HttpStatus.INTERNAL_SERVER_ERROR);
