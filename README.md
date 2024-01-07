@@ -30,7 +30,7 @@
 Kindly create the database before running the application 
 
 ```
-CREATE DATABASE LIBRARY;
+CREATE DATABASE library;
 ```
 
 
