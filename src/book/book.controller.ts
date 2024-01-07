@@ -70,7 +70,11 @@ export class BookController {
       } else if (result.message === 'Transaction not found') {
         const response = new CustomResponse('Transaction not found', HttpStatus.NOT_FOUND);
         return response;
-      } else {
+      }else if (result.message === 'The book is already returned') {
+        const response = new CustomResponse('The book is already returned', HttpStatus.CONFLICT);
+        return response;
+      } 
+      else {
         const response = new CustomResponse('Error returning book', HttpStatus.INTERNAL_SERVER_ERROR);
         return response;
       }
@@ -81,7 +85,7 @@ export class BookController {
     }
   }
 
-  
+
 
 
 

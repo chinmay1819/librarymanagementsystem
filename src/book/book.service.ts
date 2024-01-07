@@ -116,6 +116,11 @@ export class BookService {
         return { message: 'Transaction not found' };
       }
 
+      // Check if the book is already returned
+      if (transaction.status === TransactionStatus.RETURNED) {
+        return { message: 'The book is already returned' };
+      }
+
       // Update the transaction status to 'returned'
       transaction.status = TransactionStatus.RETURNED;
       transaction.returnedDate = new Date();
@@ -149,6 +154,4 @@ export class BookService {
       return { message: 'Error returning book' };
     }
   }
-
-  
 }
