@@ -83,6 +83,7 @@ Nest is [MIT licensed](LICENSE).
 GET /
 ```
 This API can be used for health check .
+
 Request url :
 
 http://localhost:3000/
