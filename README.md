@@ -73,10 +73,12 @@ Nest is an MIT-licensed open source project. It can grow thanks to the sponsors 
 Nest is [MIT licensed](LICENSE).
 
 
+GET API /members/getall
+
 Request Url : 
 
 http://localhost:3000/members/getall
-
+```
 Response body :
 [
   {
@@ -122,4 +124,4 @@ Response body :
     "address": "Pune"
   }
 ]
-
+```
