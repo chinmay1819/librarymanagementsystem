@@ -4,6 +4,7 @@ import { Repository } from 'typeorm';
 import { Member } from './members.entity';
 import { Transaction } from 'src/transactions/transactions.entity';
 import { Book } from 'src/book/book.entity';
+import { CreateMemberDto } from './dto/create-member.dto';
 
 @Injectable()
 export class MembersService {
@@ -24,7 +25,7 @@ export class MembersService {
     return await this.memberRepository.findOne({ where: { id } });
   }
 
-  async createMember(member: Member): Promise<Member> {
+  async createMember(member: CreateMemberDto): Promise<Member> {
     const newMember = this.memberRepository.create(member);
     return await this.memberRepository.save(newMember);
   }

@@ -2,19 +2,22 @@ import { Body, Controller, Delete, Get, HttpStatus, Param, Post, Put } from '@ne
 import { MembersService } from './members.service';
 import { Member } from './members.entity';
 import { CustomResponse } from 'src/shared/custom-response';
+import { ApiTags } from '@nestjs/swagger';
+import { CreateMemberDto } from './dto/create-member.dto';
 
+@ApiTags('Members')
 @Controller('members')
 export class MembersController {
     constructor(
         private readonly membersService:MembersService) {        
     }
 
-    @Get()
+    @Get('/getall')
     async findAll():Promise<Member[]>{
         return this.membersService.findAll()
     }
     
-    @Get("id")
+    @Get("/getbyid/:id")
     async findOne(@Param('id') id:number):Promise<Member>{
         const member = this.membersService.findOne(id);
         if(!member){
@@ -23,17 +26,17 @@ export class MembersController {
         return member
     }
 
-    @Post()
-    async create(@Body() member:Member):Promise<Member>{
+    @Post('/create')
+    async create(@Body() member:CreateMemberDto):Promise<Member>{
         return await this.membersService.createMember(member);
     }
 
-    @Put(':id')
+    @Put('/update/:id')
     async update(@Param('id') id:number,@Body() member:Member):Promise<Member>{
         return await this.membersService.updateMember(id,member);
     }
 
-    @Delete(':id')
+    @Delete('/delete/:id')
     async deleteMember(@Param('id')id:number){
         const member = await this.membersService.findOne(id);
         if(!member){

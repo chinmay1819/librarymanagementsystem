@@ -3,7 +3,9 @@ import { Book } from './book.entity';
 import { CreateBookDto } from './dtos/create-book.dto';
 import { CustomResponse } from 'src/shared/custom-response';
 import { BookService } from './book.service';
+import { ApiTags } from '@nestjs/swagger';
 
+@ApiTags('Books')
 @Controller('book')
 export class BookController {
     constructor(private readonly booksService: BookService) {}

@@ -5,7 +5,6 @@ import { MembersModule } from './members/members.module';
 import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { BookModule } from './book/book.module';
-// import { TransactionsModule } from './transactions/transactions.module';
 import { TransactionsModule } from './transactions/transactions.module';
 
 @Module({
@@ -21,7 +20,7 @@ import { TransactionsModule } from './transactions/transactions.module';
       database: process.env.PG_DB,
       entities: [__dirname + '/**/*.entity{.ts,.js}'],
       synchronize: true,
-      logging:true
+      logging:false
     }),
     BookModule,
     TransactionsModule
