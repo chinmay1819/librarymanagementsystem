@@ -26,6 +26,14 @@
 
 [Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
 
+## Prerequisites
+Kindly create the database before running the application 
+
+```
+CREATE DATABASE LIBRARY;
+```
+
+
 ## Installation
 
 ```bash
@@ -71,13 +79,6 @@ Nest is an MIT-licensed open source project. It can grow thanks to the sponsors 
 ## License
 
 Nest is [MIT licensed](LICENSE).
-
-
-```
-Kindly create the database before running the application 
-
-CREATE DATABASE LIBRARY;
-```
 
 
 -------------------------------------------------------------------------
