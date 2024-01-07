@@ -1,10 +1,12 @@
-import { Body, Controller, Delete, Get, Param, Post, Put } from '@nestjs/common';
+import { Body, Controller, Delete, Get, HttpStatus, Param, Post, Put } from '@nestjs/common';
 import { MembersService } from './members.service';
 import { Member } from './members.entity';
+import { CustomResponse } from 'src/shared/custom-response';
 
 @Controller('members')
 export class MembersController {
-    constructor(private readonly membersService:MembersService) {        
+    constructor(
+        private readonly membersService:MembersService) {        
     }
 
     @Get()
@@ -38,6 +40,19 @@ export class MembersController {
             throw new Error('Member not found')
         }
         return this.membersService.deleteMember(id);
+    }
+
+    @Get('/history/:memberId')
+    async history(@Param('memberId')memberId:string){
+        try{
+            const borrowingHistory = await this.membersService.getBorrowingHistory(memberId);
+            const response = new CustomResponse('Borrowing history fetched successfully', HttpStatus.OK, borrowingHistory);
+            return response;
+          } catch (error) {
+            console.error(error);
+            const response = new CustomResponse('Error fetching borrowing history', HttpStatus.INTERNAL_SERVER_ERROR);
+            return response;
+        }
     }
 
 }
