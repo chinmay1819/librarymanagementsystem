@@ -34,7 +34,7 @@ CREATE DATABASE library;
 ```
 
 
-## Installation
+## Installation 
 
 ```bash
 $ npm install
